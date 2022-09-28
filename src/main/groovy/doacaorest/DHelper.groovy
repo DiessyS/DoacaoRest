@@ -1,6 +1,5 @@
 package doacaorest
 
-import grails.converters.JSON
 import grails.util.Holders
 import org.springframework.context.i18n.LocaleContextHolder
 
