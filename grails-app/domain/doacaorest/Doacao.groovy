@@ -9,8 +9,8 @@ class Doacao {
     static belongsTo = [usuario: Usuario]
 
     static constraints = {
-        descricao blank: false, nullable: false, maxSize: 255
-        unidade blank: false, nullable: false, maxSize: 255
+        descricao blank: false, nullable: false, minSize: 1, maxSize: 255
+        unidade blank: false, nullable: false, minSize: 1, maxSize: 255
         usuario nullable: false
     }
 

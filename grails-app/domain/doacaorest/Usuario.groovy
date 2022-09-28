@@ -8,10 +8,10 @@ class Usuario {
     String senha
 
     static constraints = {
-        nome blank: false, nullable: false
-        cpf blank: false, nullable: false, unique: true
-        telefone blank: false, nullable: false
-        senha blank: false, nullable: false
+        nome blank: false, nullable: false, minSize: 1, maxSize: 255
+        cpf blank: false, nullable: false, unique: true, minSize: 1, maxSize: 255
+        telefone blank: false, nullable: false, minSize: 1, maxSize: 255
+        senha blank: false, nullable: false, minSize: 1, maxSize: 255
     }
 
     static mapping = {
