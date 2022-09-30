@@ -21,7 +21,7 @@ class RequestInterceptor {
             }
         }
 
-        if(DToken.validateTokenUsuario(idUsuario, params.token)) {
+        if(DToken.validateTokenUsuario(idUsuario, request.getHeader('token'))) {
             return true
         } else {
             render status:401, ["mensagem":DHelper.message('autorizacao.validation.naoAutorizado')] as JSON
