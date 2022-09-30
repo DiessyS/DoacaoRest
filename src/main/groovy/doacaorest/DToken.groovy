@@ -1,7 +1,5 @@
 package doacaorest
 
-import java.text.SimpleDateFormat
-
 class DToken {
     static private SERVER_SEED = UUID.randomUUID().toString()
 
@@ -10,11 +8,7 @@ class DToken {
 
         if(usuario == null) { return null }
 
-        def sdf = new SimpleDateFormat("MM/dd/yyyy")
-
-        return (
-            usuario.cpf + sdf.format(new Date()) + usuario.senha + SERVER_SEED
-        ).digest('SHA-1')
+        return (usuario.cpf + usuario.senha + SERVER_SEED).digest('SHA-1')
     }
 
     static def validateTokenUsuario(idUsuario, token) {
