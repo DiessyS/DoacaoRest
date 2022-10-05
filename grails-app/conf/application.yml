@@ -94,6 +94,9 @@ dataSource:
     username: postgres
     password: root
 
+javamelody:
+    authorized-users: user:password
+
 environments:
     development:
         dataSource:
