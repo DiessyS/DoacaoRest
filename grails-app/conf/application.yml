@@ -97,7 +97,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop #update
+            dbCreate: update
             url: jdbc:postgresql://localhost:5432/doacao
     test:
         dataSource:
