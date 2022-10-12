@@ -3,7 +3,7 @@ package doacaorest
 import grails.converters.JSON
 
 
-class RequestInterceptor {
+class RequestInterceptor extends GenericController {
 
      RequestInterceptor() {
         match controller: 'usuario', action: 'get'
@@ -13,11 +13,11 @@ class RequestInterceptor {
 
     boolean before() {
 
-        def idUsuario = params.id
+        def idUsuario = getRequestJSON().id
 
         if (["POST", "GET", "DELETE"].contains(request.method)) {
             if(request.requestURI.contains("doacoes") || request.requestURI.contains("receber")){
-                idUsuario = params.idDoador
+                idUsuario = getRequestJSON().idDoador
             }
         }
 

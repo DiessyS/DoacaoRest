@@ -2,13 +2,13 @@ package doacaorest
 
 import grails.converters.*
 
-class UsuarioController {
+class UsuarioController extends GenericController {
 	static responseFormats = ['json']
 
     def index() { }
 
     def create(){
-        def usuario = new Usuario(params)
+        def usuario = new Usuario(getRequestJSON())
 
         if(!usuario.save(flush:true)) {
             render status:401, ["mensagem:" : DHelper.message(usuario.errors.getFieldError())] as JSON
@@ -17,7 +17,7 @@ class UsuarioController {
     }
 
     def update(){
-        def usuario = Usuario.get(params.id)
+        def usuario = Usuario.get(getRequestJSON().id)
 
         if (usuario == null) {
             render status:401, [
@@ -26,9 +26,9 @@ class UsuarioController {
             return
         }
 
-        usuario.nome = params.nome
-        usuario.senha = params.senha
-        usuario.telefone = params.telefone
+        usuario.nome = getRequestJSON().nome
+        usuario.senha = getRequestJSON().senha
+        usuario.telefone = getRequestJSON().telefone
 
         if(!usuario.save(flush:true)) {
             render status:401, ["mensagem:" : DHelper.message(usuario.errors.getFieldError())] as JSON
@@ -38,7 +38,7 @@ class UsuarioController {
     }
 
     def get(){
-        def usuario = Usuario.get(params.id)
+        def usuario = Usuario.get(getRequestJSON().id)
 
         if (usuario == null) {
             render status:401, [
@@ -53,6 +53,4 @@ class UsuarioController {
                 "telefone": usuario.getTelefone(),
         ] as JSON
     }
-
-
 }

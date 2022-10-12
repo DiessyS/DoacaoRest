@@ -1,15 +1,15 @@
 package doacaorest
 import grails.converters.*
 
-class DoacaoController {
+class DoacaoController extends GenericController {
 	static responseFormats = ['json']
 	
     def index() { }
 
     def create(){
-        def doacao = new Doacao(params)
+        def doacao = new Doacao(getRequestJSON())
 
-        doacao.usuario = Usuario.get(params.idDoador)
+        doacao.usuario = Usuario.get(getRequestJSON().idDoador)
 
         if(doacao.usuario == null) {
             render status:401, [
@@ -27,8 +27,8 @@ class DoacaoController {
     }
 
     def delete(){
-        def usuario = Usuario.get(params.idDoador)
-        def doacao = Doacao.findById(params.id)
+        def usuario = Usuario.get(getRequestJSON().idDoador)
+        def doacao = Doacao.findById(getRequestJSON().id)
 
         if (doacao == null) {
             render status:401, [
@@ -67,8 +67,8 @@ class DoacaoController {
     }
 
     def receiveDoacao() {
-        def usuario = Usuario.get(params.idDoador)
-        def doacao = Doacao.findById(params.idDoacao)
+        def usuario = Usuario.get(getRequestJSON().idDoador)
+        def doacao = Doacao.findById(getRequestJSON().idDoacao)
 
         if (doacao == null) {
             render status:401, [

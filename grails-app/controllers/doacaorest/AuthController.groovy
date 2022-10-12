@@ -4,13 +4,13 @@ package doacaorest
 import grails.rest.*
 import grails.converters.*
 
-class AuthController {
+class AuthController extends GenericController {
 	static responseFormats = ['json']
 	
     def index() { }
 
     def login(){
-        def usuario = Usuario.findByCpf(params.cpf)
+        def usuario = Usuario.findByCpf(getRequestJSON().cpf)
 
         if (usuario == null) {
             render status:401, [
@@ -19,7 +19,7 @@ class AuthController {
             return
         }
 
-        if (usuario.getSenha() != params.senha) {
+        if (usuario.getSenha() != getRequestJSON().senha) {
             render status:401, [
                 "mensagem":DHelper.message('usuario.validation.credenciasInvalidas')
             ] as JSON
@@ -35,7 +35,7 @@ class AuthController {
     }
 
     def logout(){
-        def usuario = Usuario.get(params.id)
+        def usuario = Usuario.get(getRequestJSON().id)
 
         if (usuario == null) {
             render status:401, [
@@ -50,7 +50,7 @@ class AuthController {
     }
 
     def recuperarSenha() {
-        def usuario = Usuario.findByCpf(params.cpf)
+        def usuario = Usuario.findByCpf(getRequestJSON().cpf)
 
         if (usuario == null) {
             render status: 401, [
