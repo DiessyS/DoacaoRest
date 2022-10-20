@@ -17,7 +17,7 @@ class UsuarioController extends GenericController {
     }
 
     def update(){
-        def usuario = Usuario.get(getRequestJSON().id)
+        def usuario = Usuario.get(getRequestJSON(true).id)
 
         if (usuario == null) {
             render status:401, [
@@ -33,12 +33,15 @@ class UsuarioController extends GenericController {
         if(!usuario.save(flush:true)) {
             render status:401, ["mensagem:" : DHelper.message(usuario.errors.getFieldError())] as JSON
         } else {
-            render status:200, ["mensagem:" : DHelper.message('default.sucesso.message')] as JSON
+            render status:200, [
+                "mensagem:" : DHelper.message('default.sucesso.message'),
+                "token": DToken.generateTokenUsuario(usuario.getId())
+            ] as JSON
         }
     }
 
     def get(){
-        def usuario = Usuario.get(getRequestJSON().id)
+        def usuario = Usuario.get(getRequestJSON(true).id)
 
         if (usuario == null) {
             render status:401, [

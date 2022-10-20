@@ -28,7 +28,7 @@ class DoacaoController extends GenericController {
 
     def delete(){
         def usuario = Usuario.get(getRequestJSON().idDoador)
-        def doacao = Doacao.findById(getRequestJSON().id)
+        def doacao = Doacao.findById(getRequestJSON(true).id)
 
         if (doacao == null) {
             render status:401, [
@@ -64,6 +64,35 @@ class DoacaoController extends GenericController {
         })
 
         render status:200, ['lista': doacaoRetorno] as JSON
+    }
+
+    def getAllDoacoesDoador() {
+        def usuario = Usuario.get(getRequestJSON(true).idDoador)
+
+        if (usuario == null) {
+            render status:401, [
+                    "mensagem":DHelper.message('usuario.validation.naoEncontrado')
+            ] as JSON
+            return
+        }
+
+        def doacoesDoador = []
+        def doacoes = Doacao.all
+
+        doacoes.every({ doacao ->
+            if(doacao.usuario.getId() == usuario.getId()) {
+                def doacaoJson = [
+                    "codigo": doacao.getId(),
+                    "descricao": doacao.getDescricao(),
+                    "unidade": doacao.getUnidade(),
+                    "doado": doacao.getDoado(),
+                    "idDoador": doacao.usuario.getId(),
+                ]
+                doacoesDoador.add(doacaoJson)
+            }
+        })
+
+        render status:200, ['lista': doacoesDoador] as JSON
     }
 
     def receiveDoacao() {

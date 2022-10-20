@@ -35,7 +35,7 @@ class AuthController extends GenericController {
     }
 
     def logout(){
-        def usuario = Usuario.get(getRequestJSON().id)
+        def usuario = Usuario.get(getRequestJSON(true).id)
 
         if (usuario == null) {
             render status:401, [

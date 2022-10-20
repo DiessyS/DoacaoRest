@@ -6,20 +6,28 @@ import grails.converters.JSON
 class RequestInterceptor extends GenericController {
 
      RequestInterceptor() {
+        match controller: 'auth', action: 'logout'
         match controller: 'usuario', action: 'get'
         match controller: 'usuario', action: 'update'
         match controller: 'doacao'
     }
 
     boolean before() {
+        def wrapperForId = [
+            "usuarios": params.id,
+            "logon": params.id,
+            "doacoes": getRequestJSON().idDoador ?: params.idDoador
+        ]
 
-        def idUsuario = getRequestJSON().id
+        def idUsuario = 0
 
-        if (["POST", "GET", "DELETE"].contains(request.method)) {
-            if(request.requestURI.contains("doacoes") || request.requestURI.contains("receber")){
-                idUsuario = getRequestJSON().idDoador
+        wrapperForId.each { key, value ->
+            if (request.requestURI.contains(key)) {
+                idUsuario = value
             }
         }
+
+
 
         if(DToken.validateTokenUsuario(idUsuario, request.getHeader('token'))) {
             return true

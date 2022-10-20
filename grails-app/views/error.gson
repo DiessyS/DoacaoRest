@@ -1,6 +1,6 @@
 response.status 500
 
-json {    
-    message "Erro interno no servidor"
-    error 500
+json {
+    mensagem "Erro interno no servidor"
+    status 500
 }

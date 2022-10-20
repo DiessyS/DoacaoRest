@@ -1,6 +1,6 @@
 response.status 404
 
 json {
-	message "Rota não encontrada"
-	error 404
+	mensagem "Rota não encontrada"
+	status 404
 }

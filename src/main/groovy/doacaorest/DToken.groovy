@@ -8,7 +8,16 @@ class DToken {
 
         if(usuario == null) { return null }
 
-        return (usuario.cpf + usuario.senha + SERVER_SEED).digest('SHA-1')
+        StringBuilder info = new StringBuilder()
+
+        info.append(usuario.getId())
+        info.append(usuario.getTelefone())
+        info.append(usuario.getCpf())
+        info.append(usuario.getNome())
+        info.append(usuario.getSenha())
+        info.append(SERVER_SEED)
+
+        return (info.toString()).digest('SHA-1')
     }
 
     static def validateTokenUsuario(idUsuario, token) {

@@ -11,12 +11,13 @@ class UrlMappings {
 
         /* Autenticação */
         post "/login"(controller: 'auth', action: 'login')
-        get "/login"(controller: 'auth', action: 'recuperarSenha')
+        get "/recupera_senha"(controller: 'auth', action: 'recuperarSenha')
         get "/logon/$id?"(controller: 'auth', action: 'logout')
 
         /* Doação */
         post "/doacoes"(controller: 'doacao', action: 'create')
         get "/doacoes"(controller: 'doacao', action: 'getAllDoacoes')
+        get "/doacoes/$idDoador?"(controller: 'doacao', action: 'getAllDoacoesDoador')
         delete "/doacoes/$id?"(controller: 'doacao', action: 'delete')
 
         /* Receber doação */
