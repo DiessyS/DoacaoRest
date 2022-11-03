@@ -21,9 +21,9 @@ class DoacaoController extends GenericController {
         doacao.setDoado(false)
 
         if(!doacao.save(flush:true)) {
-            render status:401, ["mensagem:" : DHelper.message(doacao.errors.getFieldError())] as JSON
+            render status:401, ["mensagem" : DHelper.message(doacao.errors.getFieldError())] as JSON
         }
-        render status:200, ["mensagem:" : DHelper.message('default.sucesso.message')] as JSON
+        render status:200, ["mensagem" : DHelper.message('default.sucesso.message')] as JSON
     }
 
     def delete(){
@@ -45,7 +45,7 @@ class DoacaoController extends GenericController {
         }
 
         doacao.delete(flush:true)
-        render status:200, ["mensagem:" : DHelper.message('default.sucesso.message')] as JSON
+        render status:200, ["mensagem" : DHelper.message('default.sucesso.message')] as JSON
     }
 
     def getAllDoacoes(){
@@ -123,9 +123,9 @@ class DoacaoController extends GenericController {
         doacao.doado = true
 
         if(!doacao.save(flush:true)) {
-            render status:401, ["mensagem:" : DHelper.message(doacao.errors.getFieldError())] as JSON
+            render status:401, ["mensagem" : DHelper.message(doacao.errors.getFieldError())] as JSON
         } else {
-            render status:200, ["mensagem:" : DHelper.message('default.sucesso.message')] as JSON
+            render status:200, ["mensagem" : DHelper.message('default.sucesso.message')] as JSON
         }
     }
 }
