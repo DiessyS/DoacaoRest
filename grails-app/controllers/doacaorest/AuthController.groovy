@@ -44,9 +44,7 @@ class AuthController extends GenericController {
             return
         }
 
-        render status:200, [
-            "mensagem":DHelper.message('default.sucesso.message')
-        ] as JSON
+        render status:200
     }
 
     def recuperarSenha() {
