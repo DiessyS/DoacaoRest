@@ -48,7 +48,7 @@ class AuthController extends GenericController {
     }
 
     def recuperarSenha() {
-        def usuario = Usuario.findByCpf(getRequestJSON().cpf)
+        def usuario = Usuario.findByCpf(getRequestJSON(true).cpf)
 
         if (usuario == null) {
             render status: 401, [
