@@ -27,7 +27,11 @@ class UsuarioController extends GenericController {
         }
 
         usuario.nome = getRequestJSON().nome
-        usuario.senha = getRequestJSON().senha
+
+        if(getRequestJSON().senha != null && getRequestJSON().senha != "") {
+            usuario.senha = getRequestJSON().senha
+        }
+
         usuario.telefone = getRequestJSON().telefone
 
         if(!usuario.save(flush:true)) {
