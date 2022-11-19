@@ -11,7 +11,7 @@ class UrlMappings {
 
         /* Autenticação */
         post "/login"(controller: 'auth', action: 'login')
-        get "/recupera_senha"(controller: 'auth', action: 'recuperarSenha')
+        get "/recupera_senha/$cpf?"(controller: 'auth', action: 'recuperarSenha')
         get "/logon/$id?"(controller: 'auth', action: 'logout')
 
         /* Doação */
