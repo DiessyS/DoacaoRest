@@ -90,6 +90,7 @@ class DoacaoController extends GenericController {
                 ]
                 doacoesDoador.add(doacaoJson)
             }
+            return true;
         })
 
         render status:200, ['lista': doacoesDoador] as JSON

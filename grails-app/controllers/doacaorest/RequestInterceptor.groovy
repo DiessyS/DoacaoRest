@@ -16,7 +16,8 @@ class RequestInterceptor extends GenericController {
         def wrapperForId = [
             "usuarios": params.id,
             "logon": params.id,
-            "doacoes": getRequestJSON().idDoador ?: params.idDoador
+            "doacoes": getRequestJSON().idDoador ?: params.idDoador,
+            "receber" : getRequestJSON().idDoador ?: params.idDoador
         ]
 
         def idUsuario = 0
@@ -26,8 +27,6 @@ class RequestInterceptor extends GenericController {
                 idUsuario = value
             }
         }
-
-
 
         if(DToken.validateTokenUsuario(idUsuario, request.getHeader('token'))) {
             return true
