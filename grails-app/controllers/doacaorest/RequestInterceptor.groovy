@@ -5,11 +5,14 @@ import grails.converters.JSON
 
 class RequestInterceptor extends GenericController {
 
-     RequestInterceptor() {
+    RequestInterceptor() {
         match controller: 'auth', action: 'logout'
         match controller: 'usuario', action: 'get'
         match controller: 'usuario', action: 'update'
-        match controller: 'doacao'
+        match controller: 'doacao', action: 'create'
+        match controller: 'doacao', action: 'delete'
+        match controller: 'doacao', action: 'getAllDoacoesDoador'
+        match controller: 'doacao', action: 'receiveDoacao'
     }
 
     boolean before() {
